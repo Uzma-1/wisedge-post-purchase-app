@@ -766,7 +766,8 @@ app.post('/api/order', async (req, res) => {
   con.query(getData, async (err, rows) => {
     // Format dates
     console.log("order date", rows);
-    const saleDate = new Date(rows[0]['date']).toJSON().slice(0, 10);
+    // const saleDate = new Date(rows[0]['date']).toJSON().slice(0, 10);
+    const saleDate = new Date(rows['date']).toJSON().slice(0, 10);
     const todayDate = new Date().toJSON().slice(0, 10);
 
     // Fetch sales data for all tags (including blank tags)
