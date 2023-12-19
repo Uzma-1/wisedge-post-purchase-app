@@ -2,8 +2,8 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 import { initI18n } from "./utils/i18nUtils";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from "react-redux";
 import Store from "./redux/Store";
 
