@@ -1,0 +1,32 @@
+{
+  "name": "lucrative-shareholder-app",
+  "version": "1.0.0",
+  "main": "web/index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "shopify": "shopify",
+    "build": "shopify app build",
+    "dev": "shopify app dev",
+    "info": "shopify app info",
+    "generate": "shopify app generate",
+    "deploy": "shopify app deploy"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@shopify/app": "3.48.0",
+    "@shopify/cli": "3.48.0",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.3.1",
+    "mysql": "^2.18.1",
+    "react": "^17.0.2",
+    "react-redux": "^8.1.2",
+    "redux-saga": "^1.2.3"
+  },
+  "author": "DELL",
+  "private": true,
+  "workspaces": [
+    "web",
+    "web/frontend",
+    "extensions/*"
+  ]
+}

@@ -1,0 +1,32 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "Wisedge Post Purchase App"
+client_id = "b6b37c551b0463e41f7064f97923ecc9"
+application_url = "https://sec-married-priced-desktops.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_products,write_products,read_orders,read_customers,write_checkouts,write_orders,read_reports,read_fulfillments,read_inventory,read_all_orders"
+
+[auth]
+redirect_urls = [
+  "https://sec-married-priced-desktops.trycloudflare.com/auth/callback",
+  "https://sec-married-priced-desktops.trycloudflare.com/auth/shopify/callback",
+  "https://sec-married-priced-desktops.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-07"
+
+[app_proxy]
+url = "https://action-accused-reference-wales.trycloudflare.com/get-offer"
+subpath = "offer"
+prefix = "apps"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "upsell-main-store.myshopify.com"
