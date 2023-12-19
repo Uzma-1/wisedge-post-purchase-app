@@ -2,7 +2,7 @@
 
 name = "Wisedge Post Purchase App"
 client_id = "b6b37c551b0463e41f7064f97923ecc9"
-application_url = "https://sec-married-priced-desktops.trycloudflare.com"
+application_url = "https://funnel-app-b09c45e1570a.herokuapp.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "read_products,write_products,read_orders,read_customers,write_checkout
 
 [auth]
 redirect_urls = [
-  "https://sec-married-priced-desktops.trycloudflare.com/auth/callback",
-  "https://sec-married-priced-desktops.trycloudflare.com/auth/shopify/callback",
-  "https://sec-married-priced-desktops.trycloudflare.com/api/auth/callback"
+  "https://funnel-app-b09c45e1570a.herokuapp.com/auth/callback",
+  "https://funnel-app-b09c45e1570a.herokuapp.com/auth/shopify/callback",
+  "https://funnel-app-b09c45e1570a.herokuapp.com/api/auth/callback"
 ]
 
 [webhooks]

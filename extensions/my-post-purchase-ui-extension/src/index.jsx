@@ -17,7 +17,7 @@ import {
 } from "@shopify/post-purchase-ui-extensions-react";
 
 // For local development, replace APP_URL with your local tunnel URL.
-const APP_URL = "https://exchanges-hair-net-sys.trycloudflare.com";
+const APP_URL = "https://funnel-app-b09c45e1570a.herokuapp.com";
 
 // Preload data from your app server to ensure that the extension loads quickly.
 extend("Checkout::PostPurchase::ShouldRender", async ({ inputData }) => {
