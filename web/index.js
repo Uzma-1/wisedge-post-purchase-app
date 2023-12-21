@@ -13,12 +13,14 @@ import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import cors from "cors";
 
+// var port = '3306';
+
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database:'upsell'
+  host: "upsell-app-database.c5pjvkqxvxpv.us-east-2.rds.amazonaws.com",
+  user: "admin",
+  password: "06uOp0yJqFYz",
+  database:'upsell-app-database'
 });
 
 
