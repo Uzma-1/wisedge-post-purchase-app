@@ -17,6 +17,7 @@ import EditFunnel from "./pages/EditFunnel";
  */
 export default function Routes({ pages }) {
   const routes = useRoutes(pages);
+  console.log('routes', routes);
   // console.log('routes', routes);  
   // const routeComponents = routes.map(({ path, component: Component }) => (
   //   <Route key={path} path={path} element={<Component />} />
