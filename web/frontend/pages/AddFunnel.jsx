@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import LeftArrow from '../assets/images/left-arrow.svg';
 import { Link, useNavigate } from "react-router-dom";
-import Trigger from '../assets/images/trigger.png';
-import TriggerModal from "../components/TriggerModal";
 import {TriggerAction} from '../redux/action/TriggerAction';
 import { useDispatch } from "react-redux";
-import ShowProductModal from "../components/ShowProductModal";
 import {ShowProductAction} from '../redux/action/ShowProductAction'
 import AfterPurchase from '../assets/images/after_purchase.png';
 import { ProductAction } from "../redux/action/ProductAction";
@@ -19,8 +16,8 @@ import { DeclineOfferAction } from "../redux/action/DeclineOfferAction";
 import DeclineModal from "../components/DeclineModal";
 import DeclineCard from '../components/DeclineCard';
 import { useAuthenticatedFetch } from "../hooks";
-import { Snackbar } from "@mui/material";
 import MuiAlert from '@mui/material/Alert';
+import { Snackbar } from "@mui/material";
 
 const AddFunnel = () => {
 
@@ -321,8 +318,6 @@ setTimeout(() => {
     navigate("/goldenUpsell");
 }, 2000);
 
-
-
 }
 
     return(
@@ -330,7 +325,7 @@ setTimeout(() => {
         {
             <Snackbar
             open={snackbarOpen}
-            autoHideDuration={5000} // Adjust the duration as needed
+            autoHideDuration={5000}
             onClose={handleCloseSnackbar}
             >
                 <MuiAlert
@@ -364,64 +359,6 @@ setTimeout(() => {
                         </button>
                     </div>
                 </div>
-                {/* <div className="container_triggers">
-                    <div className="con_inr">
-                        <div className="lft_syd">
-                            <img src={Trigger} alt="Trigger" />
-                            <div className="txt_itm">
-                                <h3>Triggers</h3>
-                                <p>Select conditions you want to trigger the funnel. 
-                                    <Link to="#">Learn More</Link>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="ryt_syd">
-                            <button id="slct_btn" onClick={triggerDataHandler} >Select Triggers</button>
-                            <TriggerModal showTrigger={triggerProduct} closeTrigger={handleTriggerClose} handletriggerdata={handleTriggerProductData}/>
-                        </div>
-                    </div>
-                </div> */}
-                {/* <form action="">
-                    <div className="container_triggers shop_ajax">
-                        <div className="ajax_iner">
-                            <div className={`ajaxcart_btns ${selectedDiv === 0 ? 'active' : ''}`}
-                            onClick={() => handleDivClick(0)}>
-                                <div className="txt_itm">
-                                    <span className="field">
-                                        <span className="field_item">
-                                            <input type="radio" id="ajax_cart" className="ajax_input"
-                                                name="ajax_cart" value="Shopping Cart /  AJAX Cart" defaultChecked />
-                                            <label htmlFor="ajax_cart">Shopping Cart / AJAX Cart</label>
-                                            <p>Checkout button is clicked. 
-                                                <Link to="#">Learn More </Link>
-                                            </p>
-                                        </span>
-                                    </span>
-                                </div>
-
-                            </div>
-                            <div className={`sec_itm ajaxcart_btns ${selectedDiv === 1 ? 'active' : ''}`}
-                            onClick={() => handleDivClick(1)}>
-                                <div className="txt_itm">
-                                    <span className="field">
-                                        <span className="field_item">
-                                            <input type="radio" id="cart_ajx_btn" className="ajax_input"
-                                                name="ajax_cart" value="Product Page" defaultChecked />
-                                            <label htmlFor="cart_ajx_btn">Product Page</label>
-                                            <p>Add to Cart button is clicked. 
-                                                <Link to="#">Learn More </Link>
-                                            </p>
-                                        </span>
-                                    </span>
-                                </div>
-
-                            </div>
-                                {/* <ShowProductModal show={showProduct} close={handleProductClose} showproductdata={handleShowProductData} /> */}
-
-                            {/* <button id="add_upsell" onClick={(e) => e.preventDefault()}>Add Upsell Offer +</button> */}
-                        {/* </div>
-                    </div>
-                </form>  */}
                 <div className="after_purchase mt-5">
                     <h1>Purchase Completed</h1>
                     <div className="doted_border"></div>
