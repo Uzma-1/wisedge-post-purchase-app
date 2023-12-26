@@ -70,24 +70,24 @@ function updateStatus(status, shop) {
   });
 }
 
-// app.post("/api/offer", async (req, res) => {
-//   const token = req.body.token;
-//   try {
-//     jwt.verify(token, '52b80b1ec214ce88ac71b6744abde9ea');
-//   } catch (e) {
-//     res.status(401).send("Unauthorized");
-//     return;
-//   }
+app.post("/api/offer", async (req, res) => {
+  const token = req.body.token;
+  try {
+    jwt.verify(token, '52b80b1ec214ce88ac71b6744abde9ea');
+  } catch (e) {
+    res.status(401).send("Unauthorized");
+    return;
+  }
 
-//   try {
-//     const productsResponse = await getOffers();
-//     const products = productsResponse.data.products.edges;
+  try {
+    const productsResponse = await getOffers();
+    const products = productsResponse.data.products.edges;
 
-//     res.json({ products });
-//   } catch (error) {
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
+    res.json({ products });
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // Get Order
 async function getAllOrders(id, shop, token) {
