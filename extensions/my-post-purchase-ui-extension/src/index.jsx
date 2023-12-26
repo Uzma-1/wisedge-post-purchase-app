@@ -16,6 +16,7 @@ import {
   Layout,
 } from "@shopify/post-purchase-ui-extensions-react";
 
+
 // For local development, replace APP_URL with your local tunnel URL.
 const APP_URL = "https://funnel-app-b09c45e1570a.herokuapp.com";
 
@@ -68,7 +69,10 @@ export function App() {
       try {
         const response = await fetch(`${APP_URL}/api/get-offer`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'https://cdn.shopify.com',
+          },
           body: JSON.stringify({
             productarray: productarray,
             shop: shop
