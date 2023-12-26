@@ -210,7 +210,7 @@ export function App() {
         }),
       });
   
-      if (tokenData.status === 200) {
+      if (tokenData.status == 200) {
         const resp = await tokenData.json();
         console.log('Response from sign-changeset:', resp);
   
@@ -250,7 +250,7 @@ export function App() {
        isOrderFromPostPurchaseApp: true
      }),
    })
-   if (token.status === 200) {
+   if (token.status == 200) {
     const resp = await token.json();
     console.log('Response from sign-changeset:', resp);
 

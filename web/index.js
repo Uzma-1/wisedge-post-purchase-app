@@ -425,7 +425,7 @@ app.post("/api/get-offer", async (req, res) => {
     var status = result[0]['status'];
     // console.log('status', status);
 
-    if(status === 'true') {
+    if(status == 'true') {
       const getOffer = `SELECT *  FROM funnel WHERE main_product_id IN (${join_arr}) AND funnel_status = 'published' AND shop = '${shop}' LIMIT 1`;
       con.query(getOffer, (err, rows) => {
       if (err) {
