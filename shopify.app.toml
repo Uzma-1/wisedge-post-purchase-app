@@ -2,7 +2,7 @@
 
 name = "Wisedge Post Purchase App"
 client_id = "b6b37c551b0463e41f7064f97923ecc9"
-application_url = "https://locally-carolina-discuss-trailers.trycloudflare.com"
+application_url = "https://under-advice-websites-gage.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,16 +11,16 @@ scopes = "read_products,write_products,read_orders,read_customers,write_checkout
 
 [auth]
 redirect_urls = [
-  "https://locally-carolina-discuss-trailers.trycloudflare.com/auth/callback",
-  "https://locally-carolina-discuss-trailers.trycloudflare.com/auth/shopify/callback",
-  "https://locally-carolina-discuss-trailers.trycloudflare.com/api/auth/callback"
+  "https://under-advice-websites-gage.trycloudflare.com/auth/callback",
+  "https://under-advice-websites-gage.trycloudflare.com/auth/shopify/callback",
+  "https://under-advice-websites-gage.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
 api_version = "2023-07"
 
 [app_proxy]
-url = "https://locally-carolina-discuss-trailers.trycloudflare.com/get-offer"
+url = "https://under-advice-websites-gage.trycloudflare.com/get-offer"
 subpath = "offer"
 prefix = "apps"
 

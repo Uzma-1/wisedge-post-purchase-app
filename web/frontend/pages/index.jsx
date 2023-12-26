@@ -23,7 +23,6 @@ export default function HomePage() {
     }
   }
 
-  console.log('token', token);
   
   async function getSale() {
     try {
