@@ -410,7 +410,7 @@ function  getDeclineProductData(id, shop, token){
 }
 
 
-app.post("/api/get-offer", cors, async (req, res) => {
+app.post("/api/get-offer", cors(), async (req, res) => {
 
   const productarray = req.body;
   const shop = req.body.shop;
