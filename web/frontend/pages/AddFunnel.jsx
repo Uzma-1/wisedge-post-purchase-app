@@ -142,22 +142,22 @@ const AddFunnel = () => {
     
    function dataHandler(){
 
-    // if (!mainProductSelected || !acceptProductSelected) {
-    //     // Show an error Snackbar
-    //     setSnackbarMessage('Please select both main and accept products');
-    //     setSnackbarOpen(true);
+    if (!mainProductSelected || !acceptProductSelected) {
+        // Show an error Snackbar
+        setSnackbarMessage('Please select both main and accept products');
+        setSnackbarOpen(true);
 
-    //     // Stop the loader
-    //     setIsLoading(false);
-    //     return; // Don't proceed with saving
-    // }
+        // Stop the loader
+        setIsLoading(false);
+        return; // Don't proceed with saving
+    }
 
-    // if (!title) {
-    //     // Display a toast message when the funnel title is blank
-    //     setSnackbarMessage('Funnel title cannot be blank');
-    //     setSnackbarOpen(true);
-    //     return;
-    // }
+    if (!title) {
+        // Display a toast message when the funnel title is blank
+        setSnackbarMessage('Funnel title cannot be blank');
+        setSnackbarOpen(true);
+        return;
+    }
 
     setIsLoading(true); // Show the loader
 
@@ -322,7 +322,7 @@ setTimeout(() => {
 
     return(
         <>
-        {/* {
+        {
             <Snackbar
             open={snackbarOpen}
             autoHideDuration={5000}
@@ -337,7 +337,7 @@ setTimeout(() => {
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-        } */}
+        }
             <div className="funnel-trigger-condition">
                 <div className="back_button">
                     <Link to="/goldenUpsell" className="trigger-condition" id="trigger-condition_back">
