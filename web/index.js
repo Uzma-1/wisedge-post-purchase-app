@@ -73,7 +73,7 @@ function updateStatus(status, shop) {
 app.post("/api/offer", async (req, res) => {
   const token = req.body.token;
   try {
-    jwt.verify(token, '7ddb2a5f6f4adb090d4d55c6f0504a42');
+    jwt.verify(token, '52b80b1ec214ce88ac71b6744abde9ea');
   } catch (e) {
     res.status(401).send("Unauthorized");
     return;

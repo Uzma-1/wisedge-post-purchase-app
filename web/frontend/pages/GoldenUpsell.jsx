@@ -45,7 +45,7 @@ const GoldenUpsell = () => {
       const data = await response.json();
 	  const reversedData = [...data].reverse();
       setUsers(reversedData);
-	  setFunnelStatus(users.funnel_status === "published");
+	  setFunnelStatus(users.funnel_status == "published");
     } catch (error) {
     //   console.log('Error fetching data:', error);
     }
@@ -98,7 +98,7 @@ function nextPage(){
 
 
 const actionHandle = (index) => {
-setOpenDropdownIndex(index === openDropdownIndex ? null : index);
+setOpenDropdownIndex(index == openDropdownIndex ? null : index);
 };
 
 // Delete Funnel
@@ -131,7 +131,7 @@ const deleteHandle = (Id) => {
 
 //   Toaster Close
   const handleCloseSnackbar = (event, reason) => {
-	if (reason === 'clickaway') {
+	if (reason == 'clickaway') {
 	  return;
 	}
   
