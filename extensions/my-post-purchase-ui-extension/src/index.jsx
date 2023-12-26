@@ -67,6 +67,7 @@ export function App() {
     // Accept Offer
     async function sendProductData(){
       try {
+        console.log("get offer function");
         const response = await fetch(`${APP_URL}/api/get-offer`, {
           method: 'POST',
           headers: { 
@@ -78,7 +79,7 @@ export function App() {
             shop: shop
           }),
         });
-  
+        console.log("get offer function bottom");
         const data = await response.json();
         var resp = data?.data;
         if(resp == undefined){
