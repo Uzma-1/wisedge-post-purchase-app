@@ -15,9 +15,9 @@ import AcceptCard from "../components/AcceptCard";
 import { DeclineOfferAction } from "../redux/action/DeclineOfferAction";
 import DeclineModal from "../components/DeclineModal";
 import DeclineCard from '../components/DeclineCard';
-import { useAuthenticatedFetch } from "../hooks";
 import MuiAlert from '@mui/material/Alert';
 import { Snackbar } from "@mui/material";
+import { useAuthenticatedFetch } from "../hooks";
 
 const AddFunnel = () => {
 
@@ -140,189 +140,193 @@ const AddFunnel = () => {
         setPublish((prevState) => !prevState); // Using the previous state to ensure correct update
     }
     
-   function dataHandler(){
+//    function dataHandler(){
 
-    if (!mainProductSelected || !acceptProductSelected) {
-        // Show an error Snackbar
-        setSnackbarMessage('Please select both main and accept products');
-        setSnackbarOpen(true);
+//     if (!mainProductSelected || !acceptProductSelected) {
+//         // Show an error Snackbar
+//         setSnackbarMessage('Please select both main and accept products');
+//         setSnackbarOpen(true);
 
-        // Stop the loader
-        setIsLoading(false);
-        return; // Don't proceed with saving
-    }
+//         // Stop the loader
+//         setIsLoading(false);
+//         return; // Don't proceed with saving
+//     }
 
-    if (!title) {
-        // Display a toast message when the funnel title is blank
-        setSnackbarMessage('Funnel title cannot be blank');
-        setSnackbarOpen(true);
-        return;
-    }
+//     if (!title) {
+//         // Display a toast message when the funnel title is blank
+//         setSnackbarMessage('Funnel title cannot be blank');
+//         setSnackbarOpen(true);
+//         return;
+//     }
 
-    setIsLoading(true); // Show the loader
+//     setIsLoading(true); // Show the loader
 
-        // funnel Data
-        var funnel_name = document.querySelector('.tit_itm input');
-        var funnel_value = funnel_name.value;
-        var ajaxcart_btns =  document.querySelector('.ajax_iner .ajaxcart_btns.active .ajax_input');
-        var trigger_value = ajaxcart_btns ? ajaxcart_btns.value : "Shopping Cart / AJAX Cart";
-        var main_product = document.querySelectorAll('.upsell_single.main_step .img_tit_right');
-        var data_id_final = '';
-            main_product.forEach(function (main_pro) {
-                data_id_final = main_pro.getAttribute('dataid')
-            });
-        var main_pro_id = data_id_final;
-        var accept_product = document.querySelectorAll('.if_customer_accepts_offer .img_tit_right');
-        var accept_id = '';
-            accept_product.forEach(function (accept_pro) {
-                accept_id = accept_pro.getAttribute('dataid')
-            });
-        var accept_pro_id = accept_id;
+//         // funnel Data
+//         var funnel_name = document.querySelector('.tit_itm input');
+//         var funnel_value = funnel_name.value;
+//         var ajaxcart_btns =  document.querySelector('.ajax_iner .ajaxcart_btns.active .ajax_input');
+//         var trigger_value = ajaxcart_btns ? ajaxcart_btns.value : "Shopping Cart / AJAX Cart";
+//         var main_product = document.querySelectorAll('.upsell_single.main_step .img_tit_right');
+//         var data_id_final = '';
+//             main_product.forEach(function (main_pro) {
+//                 data_id_final = main_pro.getAttribute('dataid')
+//             });
+//         var main_pro_id = data_id_final;
+//         var accept_product = document.querySelectorAll('.if_customer_accepts_offer .img_tit_right');
+//         var accept_id = '';
+//             accept_product.forEach(function (accept_pro) {
+//                 accept_id = accept_pro.getAttribute('dataid')
+//             });
+//         var accept_pro_id = accept_id;
 
 
-        var decline_product = document.querySelectorAll('.if_customer_declines_offer .img_tit_right');
-        var decline_id = '';
-            decline_product.forEach(function (decline_pro) {
-                decline_id = decline_pro.getAttribute('dataid');
-            });
-        var decline_pro_id = decline_id;
+//         var decline_product = document.querySelectorAll('.if_customer_declines_offer .img_tit_right');
+//         var decline_id = '';
+//             decline_product.forEach(function (decline_pro) {
+//                 decline_id = decline_pro.getAttribute('dataid');
+//             });
+//         var decline_pro_id = decline_id;
         
         
-        var accept_status_value = document.querySelector('.if_customer_accepts_offer .details_left .status_btn input');
-        var accept_status = accept_status_value ? (accept_status_value.checked ? "on" : "off") : "off";
+//         var accept_status_value = document.querySelector('.if_customer_accepts_offer .details_left .status_btn input');
+//         var accept_status = accept_status_value ? (accept_status_value.checked ? "on" : "off") : "off";
 
-        var decline_status_value = document.querySelector('.if_customer_declines_offer .details_left .status_btn input');
-        var decline_status = decline_status_value ? (decline_status_value.checked ? "on" : "off") : "off";
+//         var decline_status_value = document.querySelector('.if_customer_declines_offer .details_left .status_btn input');
+//         var decline_status = decline_status_value ? (decline_status_value.checked ? "on" : "off") : "off";
         
-        // Product Table Data
-        var main_pro_table_id = main_pro_id;
-        var accept_pro_table_id = accept_pro_id;
-        var decline_pro_table_id = decline_id;
-        var main_product_img = document.querySelectorAll('.upsell_single.main_step .img_tit_right img');
-        var pro_img_final = '';
-            main_product_img.forEach(function (main_pro_img) {
-                console.log("ee");
-                pro_img_final = main_pro_img.getAttribute('src');
-                console.log("ee", pro_img_final);
-            });
-        var pro_main_img = pro_img_final;
+//         // Product Table Data
+//         var main_pro_table_id = main_pro_id;
+//         var accept_pro_table_id = accept_pro_id;
+//         var decline_pro_table_id = decline_id;
+//         var main_product_img = document.querySelectorAll('.upsell_single.main_step .img_tit_right img');
+//         var pro_img_final = '';
+//             main_product_img.forEach(function (main_pro_img) {
+//                 console.log("ee");
+//                 pro_img_final = main_pro_img.getAttribute('src');
+//                 console.log("ee", pro_img_final);
+//             });
+//         var pro_main_img = pro_img_final;
 
-        var accept_product_img = document.querySelectorAll('.if_customer_accepts_offer .img_tit_right img');
-        var accept_img = '';
-        accept_product_img.forEach(function (accept_pro_img) {
-                accept_img = accept_pro_img.getAttribute('src')
-            });
-        var accept_pro_image = accept_img;
+//         var accept_product_img = document.querySelectorAll('.if_customer_accepts_offer .img_tit_right img');
+//         var accept_img = '';
+//         accept_product_img.forEach(function (accept_pro_img) {
+//                 accept_img = accept_pro_img.getAttribute('src')
+//             });
+//         var accept_pro_image = accept_img;
         
-        var decline_product_img = document.querySelectorAll('.if_customer_declines_offer .img_tit_right img');
-        var decline_img = '';
-        decline_product_img.forEach(function (decline_pro_img) {
-            decline_img = decline_pro_img.getAttribute('src')
-            });
-        var decline_pro_image = decline_img;
+//         var decline_product_img = document.querySelectorAll('.if_customer_declines_offer .img_tit_right img');
+//         var decline_img = '';
+//         decline_product_img.forEach(function (decline_pro_img) {
+//             decline_img = decline_pro_img.getAttribute('src')
+//             });
+//         var decline_pro_image = decline_img;
 
-        var main_product_title = document.querySelector('.upsell_single.main_step .img_tit_right .prod_title');
-        var main_pro_title = main_product_title ? main_product_title.textContent : "";
+//         var main_product_title = document.querySelector('.upsell_single.main_step .img_tit_right .prod_title');
+//         var main_pro_title = main_product_title ? main_product_title.textContent : "";
 
-        var accept_product_title = document.querySelector('.if_customer_accepts_offer .img_tit_right .prod_title');
-        var accept_pro_title = accept_product_title ? accept_product_title.textContent : "";
+//         var accept_product_title = document.querySelector('.if_customer_accepts_offer .img_tit_right .prod_title');
+//         var accept_pro_title = accept_product_title ? accept_product_title.textContent : "";
 
-        var decline_product_title = document.querySelector('.if_customer_declines_offer .img_tit_right .prod_title');
-        var delcine_pro_title = decline_product_title ? decline_product_title.textContent : "";
-
-
-        var main_product_price = document.querySelector('.upsell_single.main_step .img_tit_right .prod_price');
-        var main_pro_price = main_product_price ? main_product_price.textContent : "";
-
-        var accpet_product_price = document.querySelector('.if_customer_accepts_offer .img_tit_right .prod_price');
-        var accept_pro_price = accpet_product_price ? accpet_product_price.textContent : "";
-
-        var decline_product_price = document.querySelector('.if_customer_declines_offer .img_tit_right .prod_price');
-        var decline_pro_price = decline_product_price ? decline_product_price.textContent : "";
-
-        var funnel_status_value = document.querySelector('.condition_item .publish-funnel.published');
-        var funnel_status = funnel_status_value ? "published" : "unpublished";
-        console.log('funnel_status', funnel_status);
-
-        var product_data = {
-            main_pro_table: {
-                product_id: main_pro_table_id,
-                image: pro_main_img,
-                title: main_pro_title,
-                price: main_pro_price
-            },
-            accept_pro_table: {
-                product_id: accept_pro_table_id,
-                image: accept_pro_image,
-                title: accept_pro_title,
-                price: accept_pro_price
-            },
-            decline_pro_table: {
-                product_id: decline_pro_table_id,
-                image: decline_pro_image,
-                title: delcine_pro_title,
-                price: decline_pro_price
-            }
-        }
-        console.log(product_data, "product_data");
-        var product_id = [
-            main_pro_table_id,
-            accept_pro_table_id,
-            decline_pro_table_id
-        ]
-        console.log('product_id??', product_id);
-
-            var send_data = {
-                funnel_name:funnel_value,
-                funnel_status:funnel_status,
-                funnel_trigger:trigger_value,
-                main_product_id:main_pro_id,
-                accept_product_id:accept_pro_id,
-                decline_product_id:decline_pro_id,
-                accept_status:accept_status,
-                decline_status:decline_status,
-                // product_id: main_pro_table_id,
-                // product_id: accept_pro_table_id,
-                // product_id: decline_pro_table_id,
-                product_id: product_id,
-                product_data: product_data,
-            }   
+//         var decline_product_title = document.querySelector('.if_customer_declines_offer .img_tit_right .prod_title');
+//         var delcine_pro_title = decline_product_title ? decline_product_title.textContent : "";
 
 
-    fetch('/api/update-funnel', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(send_data)
-    })
-    .then((response) => {
-        if (!response.ok) {
-        throw new Error('Error: ' + response.status);
-        }
-        return response.json();
-    })
-    .then((responseData) => {
-        console.log(responseData);
-    })
-    .catch((error) => {
-        console.error('Error sending data:', error);
+//         var main_product_price = document.querySelector('.upsell_single.main_step .img_tit_right .prod_price');
+//         var main_pro_price = main_product_price ? main_product_price.textContent : "";
+
+//         var accpet_product_price = document.querySelector('.if_customer_accepts_offer .img_tit_right .prod_price');
+//         var accept_pro_price = accpet_product_price ? accpet_product_price.textContent : "";
+
+//         var decline_product_price = document.querySelector('.if_customer_declines_offer .img_tit_right .prod_price');
+//         var decline_pro_price = decline_product_price ? decline_product_price.textContent : "";
+
+//         var funnel_status_value = document.querySelector('.condition_item .publish-funnel.published');
+//         var funnel_status = funnel_status_value ? "published" : "unpublished";
+//         console.log('funnel_status', funnel_status);
+
+//         var product_data = {
+//             main_pro_table: {
+//                 product_id: main_pro_table_id,
+//                 image: pro_main_img,
+//                 title: main_pro_title,
+//                 price: main_pro_price
+//             },
+//             accept_pro_table: {
+//                 product_id: accept_pro_table_id,
+//                 image: accept_pro_image,
+//                 title: accept_pro_title,
+//                 price: accept_pro_price
+//             },
+//             decline_pro_table: {
+//                 product_id: decline_pro_table_id,
+//                 image: decline_pro_image,
+//                 title: delcine_pro_title,
+//                 price: decline_pro_price
+//             }
+//         }
+//         console.log(product_data, "product_data");
+//         var product_id = [
+//             main_pro_table_id,
+//             accept_pro_table_id,
+//             decline_pro_table_id
+//         ]
+//         console.log('product_id??', product_id);
+
+//             var send_data = {
+//                 funnel_name:funnel_value,
+//                 funnel_status:funnel_status,
+//                 funnel_trigger:trigger_value,
+//                 main_product_id:main_pro_id,
+//                 accept_product_id:accept_pro_id,
+//                 decline_product_id:decline_pro_id,
+//                 accept_status:accept_status,
+//                 decline_status:decline_status,
+//                 // product_id: main_pro_table_id,
+//                 // product_id: accept_pro_table_id,
+//                 // product_id: decline_pro_table_id,
+//                 product_id: product_id,
+//                 product_data: product_data,
+//             }   
 
 
-    // Hide the loader if an error occurs
-    setIsLoading(false);
+//     fetch('/api/update-funnel', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(send_data)
+//     })
+//     .then((response) => {
+//         if (!response.ok) {
+//         throw new Error('Error: ' + response.status);
+//         }
+//         return response.json();
+//     })
+//     .then((responseData) => {
+//         console.log(responseData);
+//     })
+//     .catch((error) => {
+//         console.error('Error sending data:', error);
 
-});
 
-setTimeout(() => {
-    navigate("/goldenUpsell");
-}, 2000);
+//     // Hide the loader if an error occurs
+//     setIsLoading(false);
+
+// });
+
+// setTimeout(() => {
+//     navigate("/goldenUpsell");
+// }, 2000);
+
+// }
+
+function dataHandler(){
 
 }
 
     return(
         <>
-        {
+        {/* {
             <Snackbar
             open={snackbarOpen}
             autoHideDuration={5000}
@@ -337,7 +341,7 @@ setTimeout(() => {
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
-        }
+        } */}
             <div className="funnel-trigger-condition">
                 <div className="back_button">
                     <Link to="/goldenUpsell" className="trigger-condition" id="trigger-condition_back">
