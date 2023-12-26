@@ -70,6 +70,7 @@ export function App() {
         console.log("get offer function");
         const response = await fetch(`${APP_URL}/api/get-offer`, {
           method: 'POST',
+          mode: 'no-cors',
           headers: { 
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
