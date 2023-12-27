@@ -101,7 +101,10 @@ export function App() {
           try {
             const response = await fetch(`${APP_URL}/api/decline-offer`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+              },
               body: JSON.stringify({
                 productarray: productarray,
                 shop: shop,
@@ -205,7 +208,10 @@ export function App() {
       // Make a request to your app server to sign the changeset with your app's API secret key.
       const tokenData = await fetch(`${APP_URL}/api/sign-changeset`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
         body: JSON.stringify({
           referenceId: inputData.initialPurchase.referenceId,
           changes: pro_variant_id,
@@ -246,7 +252,10 @@ export function App() {
   try{
     const token = await fetch(`${APP_URL}/api/decline-changeset`, {
      method: 'POST',
-     headers: {'Content-Type': 'application/json'},
+     headers: { 
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
      body: JSON.stringify({
        referenceId: inputData.initialPurchase.referenceId,
        changes: decline_pro_variant_id,
