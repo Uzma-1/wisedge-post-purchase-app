@@ -52,12 +52,8 @@ app.post(
 
 app.use(express.json());
 // Add these headers to your server responses
-app.use(cors({
-  origin: 'https://cdn.shopify.com',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204,
-}));
+app.use(cors());
+
 
 
 
