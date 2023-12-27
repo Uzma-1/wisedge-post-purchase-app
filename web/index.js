@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: 'https://cdn.shopify.com',
+  origin: '*',
   credentials: true,
 }));
 
