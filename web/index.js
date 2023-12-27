@@ -55,8 +55,13 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://cdn.shopify.com');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
+
+  // Enable preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).send();
+  } else {
+    next();
+  }
 });
 
 app.use(cors());
