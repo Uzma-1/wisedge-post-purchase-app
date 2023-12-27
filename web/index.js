@@ -233,7 +233,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
       console.log("isOrderFromPostPurchaseApp:", isOrderFromPostPurchaseApp);
 
       // Check if this order is from the post-purchase app
-      if (isOrderFromPostPurchaseApp === true) {
+      if (isOrderFromPostPurchaseApp == true) {
         // You might need to implement logic here to determine if this order is from applychangeset
 
         customer_detail = await getAllOrders(customerId, shop, tokenFinal);
@@ -263,7 +263,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         }
 
         // If order_detail is still null, it means no matching order was found
-        if (order_detail === null) {
+        if (order_detail == null) {
           console.log('No matching order found.');
           res.status(404).send("Order not found");
           return;
