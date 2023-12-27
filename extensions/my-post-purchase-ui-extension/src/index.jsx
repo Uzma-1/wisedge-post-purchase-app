@@ -101,6 +101,7 @@ export function App() {
           try {
             const response = await fetch(`${APP_URL}/api/decline-offer`, {
               method: 'POST',
+              mode: 'cors',
               headers: { 
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -208,6 +209,7 @@ export function App() {
       // Make a request to your app server to sign the changeset with your app's API secret key.
       const tokenData = await fetch(`${APP_URL}/api/sign-changeset`, {
         method: 'POST',
+        mode: 'cors',
         headers: { 
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
@@ -252,6 +254,7 @@ export function App() {
   try{
     const token = await fetch(`${APP_URL}/api/decline-changeset`, {
      method: 'POST',
+     mode: 'cors',
      headers: { 
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
