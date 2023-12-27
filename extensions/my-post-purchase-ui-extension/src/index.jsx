@@ -212,6 +212,7 @@ export function App() {
         mode: 'cors',
         headers: { 
           'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           referenceId: inputData.initialPurchase.referenceId,
