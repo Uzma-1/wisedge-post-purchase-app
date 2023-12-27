@@ -52,7 +52,7 @@ app.post(
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://cdn.shopify.com');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
@@ -206,7 +206,7 @@ async function updateOrderTags(id, shop, tags, token) {
 // Initialize an object to track processed interactions
 const tagsToAdd = ['Wisedge']; // Specify the tags to add
 
-app.post("/api/sign-changeset", async (req, res) => {
+app.post("/api/sign-changeset", cors(), async (req, res) => {
   try {
     // Verify the JWT token
     jwt.verify(req.body.token, '52b80b1ec214ce88ac71b6744abde9ea');
