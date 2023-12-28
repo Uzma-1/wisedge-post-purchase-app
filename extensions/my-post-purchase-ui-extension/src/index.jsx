@@ -201,7 +201,7 @@ export function App() {
 
    // Extract values from the calculated purchase.
    
-  console.log('accept offer');
+  console.log('accept offer???');
    async function acceptOffer() {
     setAcceptOfferLoading(true);
     console.log("sign changeset top");
