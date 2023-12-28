@@ -36,7 +36,7 @@ const app = express();
 
 // cors setup
 app.use(cors({
-  origin: 'https://cdn.shopify.com',
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));

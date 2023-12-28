@@ -204,7 +204,7 @@ export function App() {
 
    async function acceptOffer() {
     setAcceptOfferLoading(true);
-  
+    console.log("sign changeset top");
     try {
       // Make a request to your app server to sign the changeset with your app's API secret key.
       const tokenData = await fetch(`${APP_URL}/api/sign-changeset`, {
@@ -230,11 +230,11 @@ export function App() {
   
         // Proceed with applying the changeset if necessary
         await applyChangeset(resp.token);
-  
+        
         // Redirect to the thank-you page or perform any other necessary actions.
-        // setTimeout(function(){
-        //   done();
-        // }, 3000);
+        setTimeout(function(){
+          done();
+        }, 3000);
         
       } else {
         console.error('Failed to sign changeset. Status:', tokenData.status);
