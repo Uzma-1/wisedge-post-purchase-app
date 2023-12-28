@@ -232,9 +232,9 @@ export function App() {
         await applyChangeset(resp.token);
   
         // Redirect to the thank-you page or perform any other necessary actions.
-        setTimeout(function(){
-          done();
-        }, 3000);
+        // setTimeout(function(){
+        //   done();
+        // }, 3000);
         
       } else {
         console.error('Failed to sign changeset. Status:', tokenData.status);
