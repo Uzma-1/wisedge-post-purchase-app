@@ -61,11 +61,12 @@ app.use((req, res, next) => {
   next();
 });
 
-const corsOptions = {
-  origin: "*",
-};
-app.options("/api/*", cors(corsOptions));
+  
+  app.use(cors({
+  origin: '*'
+  }));
 
+  app.options("/api/*", cors());
 
 
 
