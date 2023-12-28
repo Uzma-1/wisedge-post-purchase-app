@@ -240,7 +240,7 @@ export function App() {
         console.error('Failed to sign changeset. Status:', tokenData.status);
       }
     } catch (error) {
-      console.error('Error in acceptOffer:', error);
+      // console.error('Error in acceptOffer:', error);
       // Handle errors appropriately
     } finally {
       setAcceptOfferLoading(false);
@@ -257,7 +257,7 @@ export function App() {
      mode: 'cors',
      headers: { 
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'https://cdn.shopify.com',
+      'Access-Control-Allow-Origin': '*',
     },
      body: JSON.stringify({
        referenceId: inputData.initialPurchase.referenceId,
