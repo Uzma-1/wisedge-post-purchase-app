@@ -20,7 +20,7 @@ redirect_urls = [
 api_version = "2023-07"
 
 [app_proxy]
-url = "https://funnel-app-b09c45e1570a.herokuapp.com/get-offer"
+url = "https://sells-toy-spies-hyundai.trycloudflare.com/get-offer"
 subpath = "offer"
 prefix = "apps"
 
