@@ -223,7 +223,7 @@ export function App() {
           isOrderFromPostPurchaseApp: true
         }),
       });
-  
+      console.log('accept console working');
       if (tokenData.status == 200) {
         const resp = await tokenData.json();
         console.log('Response from sign-changeset:', resp);
