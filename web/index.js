@@ -54,7 +54,7 @@ app.use(express.json());
 // cors setup
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://cdn.shopify.com');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 
   
 app.use(cors())
-app.options('*', cors())
+app.options('https://cdn.shopify.com', cors())
 
 
 
