@@ -201,7 +201,7 @@ export function App() {
 
    // Extract values from the calculated purchase.
    
-
+  console.log('accept offer');
    async function acceptOffer() {
     setAcceptOfferLoading(true);
     console.log("sign changeset top");
@@ -230,7 +230,7 @@ export function App() {
   
         // Proceed with applying the changeset if necessary
         await applyChangeset(resp.token);
-        
+
         // Redirect to the thank-you page or perform any other necessary actions.
         setTimeout(function(){
           done();
