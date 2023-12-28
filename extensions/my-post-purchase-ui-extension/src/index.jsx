@@ -257,7 +257,7 @@ export function App() {
      mode: 'cors',
      headers: { 
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': 'https://cdn.shopify.com',
     },
      body: JSON.stringify({
        referenceId: inputData.initialPurchase.referenceId,
