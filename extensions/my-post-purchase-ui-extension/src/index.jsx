@@ -19,14 +19,6 @@ import {
 
 // For local development, replace APP_URL with your local tunnel URL.
 const APP_URL = "https://funnel-app-b09c45e1570a.herokuapp.com";
-if (APP_URL == "https://funnel-app-b09c45e1570a.herokuapp.com") {
-  console.error(`
-    ************************************************************
-    You must set the host to your Cloudflare URL in useEvaluateGate.js.
-    Run \`npm run dev\` and replace the YOUR_TUNNEL_URL with the URL found in the terminal
-    ************************************************************
-  `);
-}
 
 // Preload data from your app server to ensure that the extension loads quickly.
 extend("Checkout::PostPurchase::ShouldRender", async ({ inputData }) => {
