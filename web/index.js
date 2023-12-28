@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 
   
 app.use(cors());
-app.options('https://cdn.shopify.com', cors());
+// app.options('https://cdn.shopify.com', cors());
 
 // Set up Shopify authentication and webhook handling
 app.get(shopify.config.auth.path, shopify.auth.begin());
