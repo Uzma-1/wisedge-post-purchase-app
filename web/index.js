@@ -140,8 +140,7 @@ async function getAllOrders(id, shop, token) {
       console.log('GraphQL Response:', response.data);
 
       // Add the orders to the allOrders array
-      // allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
-      allOrders.push(response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
       console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
       console.log('allOrders', allOrders);
       // Update cursor and hasNextPage based on the response
@@ -194,14 +193,14 @@ async function updateOrderTags(id, shop, tags, token) {
     });
 
     // Handle the response
-    if (response.status == 200) {
+    if (response.status === 200) {
       console.log('Order tags updated successfully.');
-      console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify(response.data));
 
       // Return the updated order details
       return response?.data?.data?.orderUpdate?.order;
     } else {
-      console.error('Failed to update order tags. Status:', response?.status);
+      console.error('Failed to update order tags. Status:', response.status);
     }
   } catch (error) {
     console.error('Error updating order tags:', error);
@@ -245,15 +244,14 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         var customer_detail_data = await getAllOrders(customerId, shop, tokenFinal);
         customer_detail.push(customer_detail_data);
 
-        console.log('customer_detail??', customer_detail);
+        console.log('customer_detail', customer_detail);
         // Get the last order in the list (if any)
         const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
           const lastOrder = customer_detail[lastOrderIndex];
-          console.log('last order index', customer_detail[lastOrderIndex]);
           currentOrderId = lastOrder?.id;
 
-          console.log('currentOrderId', lastOrder);
+          console.log('currentOrderId', currentOrderId);
 
           // Define the tags to add for the current order
           const tags = tagsToAdd;
@@ -261,7 +259,6 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
           // Update order tags using the updateOrderTags function
           try {
             order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
-            console.log('order_detail', order_detail);
           } catch (updateError) {
             console.error(updateError);
             res.status(500).send("Error updating order tags");
@@ -274,7 +271,6 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         // If order_detail is still null, it means no matching order was found
         if (order_detail == null) {
           console.log('No matching order found.');
-          console.log('last order index', customer_detail[lastOrderIndex]);
           res.status(404).send("Order not found");
           return;
         }
