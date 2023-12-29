@@ -554,7 +554,7 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
       console.log("isOrderFromPostPurchaseApp:", isOrderFromPostPurchaseApp);
 
       // Check if this order is from the post-purchase app
-      if (isOrderFromPostPurchaseApp === true) {
+      if (isOrderFromPostPurchaseApp == true) {
         // You might need to implement logic here to determine if this order is from applychangeset
 
         customer_detail = await getAllOrders(customerId, shop, tokenFinal);
@@ -564,7 +564,7 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
         const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
           const lastOrder = customer_detail[lastOrderIndex];
-          currentOrderId = lastOrder.id;
+          currentOrderId = lastOrder?.[0]?.[0]?.id;
 
           console.log('currentOrderId', currentOrderId);
 
