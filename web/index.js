@@ -556,10 +556,10 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
         // You might need to implement logic here to determine if this order is from applychangeset
 
         customer_detail = await getAllOrders(customerId, shop, tokenFinal);
-
+        console.log('customer_detail decline',customer_detail);
       
         // Get the last order in the list (if any)
-        const lastOrderIndex = customer_detail.length - 1;
+        const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
           const lastOrder = customer_detail[lastOrderIndex];
           currentOrderId = lastOrder.id;
