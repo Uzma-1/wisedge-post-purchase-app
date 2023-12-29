@@ -248,6 +248,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         console.log('customer_detail', customer_detail);
         // Get the last order in the list (if any)
         const lastOrderIndex = customer_detail?.length - 1;
+        console.log('accept lastOrderIndex', lastOrderIndex);
         if (lastOrderIndex >= 0) {
           var lastOrder = customer_detail[lastOrderIndex];
           currentOrderId = lastOrder?.[0]?.[0]?.id;
@@ -557,7 +558,8 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
       if (isOrderFromPostPurchaseApp == true) {
         // You might need to implement logic here to determine if this order is from applychangeset
 
-        customer_detail = await getAllOrders(customerId, shop, tokenFinal);
+        var customer_detail_data = await getAllOrders(customerId, shop, tokenFinal);
+        customer_detail.push(customer_detail_data);
         console.log('customer_detail decline',customer_detail);
       
         // Get the last order in the list (if any)
