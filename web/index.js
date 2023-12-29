@@ -140,9 +140,8 @@ async function getAllOrders(id, shop, token) {
       console.log('GraphQL Response:', response.data);
 
       // Add the orders to the allOrders array
-      var allOrderData = response?.data?.data?.customer?.orders?.edges;
       // allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
-      allOrders.push(...allOrderData.map(orderEdge => orderEdge?.node));
+      allOrders.push(response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
       console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
       console.log('allOrders', allOrders);
       // Update cursor and hasNextPage based on the response
@@ -251,9 +250,9 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
           const lastOrder = customer_detail[lastOrderIndex];
-          currentOrderId = lastOrder.id;
+          currentOrderId = lastOrder?.id;
 
-          console.log('currentOrderId', currentOrderId);
+          console.log('currentOrderId', lastOrder);
 
           // Define the tags to add for the current order
           const tags = tagsToAdd;
