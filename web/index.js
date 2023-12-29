@@ -194,7 +194,7 @@ async function updateOrderTags(id, shop, tags, token) {
     });
 
     // Handle the response
-    if (response.status === 200) {
+    if (response.status == 200) {
       console.log('Order tags updated successfully.');
       console.log(JSON.stringify(response.data));
 
@@ -250,6 +250,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
           const lastOrder = customer_detail[lastOrderIndex];
+          console.log('last order index', customer_detail[lastOrderIndex]);
           currentOrderId = lastOrder?.id;
 
           console.log('currentOrderId', lastOrder);
@@ -260,6 +261,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
           // Update order tags using the updateOrderTags function
           try {
             order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
+            console.log('order_detail', order_detail);
           } catch (updateError) {
             console.error(updateError);
             res.status(500).send("Error updating order tags");
