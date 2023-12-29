@@ -566,7 +566,7 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
           const lastOrder = customer_detail[lastOrderIndex];
           currentOrderId = lastOrder?.[0]?.[0]?.id;
 
-          console.log('decline currentOrderId', lastOrder?.[0]);
+          console.log('decline currentOrderId', customer_detail[lastOrderIndex]);
 
           // Define the tags to add for the current order
           const tags = tagsToAdd;
