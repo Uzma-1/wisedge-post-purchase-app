@@ -140,8 +140,16 @@ async function getAllOrders(id, shop, token) {
       console.log('GraphQL Response:', response.data);
 
       // Add the orders to the allOrders array
-      allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      // allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
       // allOrders.push(response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      const orderEdges = response?.data?.data?.customer?.orders?.edges;
+      console.log('orderEdges', orderEdges);
+      if (orderEdges) {
+        allOrders.push(...orderEdges.map(orderEdge => orderEdge?.node));
+      } else {
+        console.error('No order edges found in the response.');
+        // You might want to handle this case accordingly based on your requirements
+      }
       console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
       console.log('allOrders', allOrders);
       // Update cursor and hasNextPage based on the response
