@@ -141,7 +141,8 @@ async function getAllOrders(id, shop, token) {
 
       // Add the orders to the allOrders array
       allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
-
+      console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
+      console.log('allOrders', allOrders);
       // Update cursor and hasNextPage based on the response
       cursor = response?.data?.data?.customer?.orders?.pageInfo?.endCursor;
       hasNextPage = response?.data?.data?.customer?.orders?.pageInfo?.hasNextPage;
@@ -242,9 +243,9 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
 
         customer_detail = await getAllOrders(customerId, shop, tokenFinal);
 
-      
+        console.log('customer_detail', customer_detail);
         // Get the last order in the list (if any)
-        const lastOrderIndex = customer_detail.length - 1;
+        const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
           const lastOrder = customer_detail[lastOrderIndex];
           currentOrderId = lastOrder.id;
