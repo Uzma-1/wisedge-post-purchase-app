@@ -146,7 +146,8 @@ async function getAllOrders(id, shop, token) {
       cursor = response?.data?.data?.customer?.orders?.pageInfo?.endCursor;
       hasNextPage = response?.data?.data?.customer?.orders?.pageInfo?.hasNextPage;
     } catch (error) {
-      throw error;
+      console.error('Error processing orders:', error);
+      return;
     }
   }
 
