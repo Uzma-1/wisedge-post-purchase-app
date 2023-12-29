@@ -245,7 +245,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         var customer_detail_data = await getAllOrders(customerId, shop, tokenFinal);
         customer_detail.push(customer_detail_data);
 
-        console.log('customer_detail', customer_detail);
+        console.log('customer_detail??', customer_detail);
         // Get the last order in the list (if any)
         const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
@@ -274,6 +274,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         // If order_detail is still null, it means no matching order was found
         if (order_detail == null) {
           console.log('No matching order found.');
+          console.log('last order index', customer_detail[lastOrderIndex]);
           res.status(404).send("Order not found");
           return;
         }
