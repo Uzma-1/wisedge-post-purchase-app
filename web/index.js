@@ -140,8 +140,8 @@ async function getAllOrders(id, shop, token) {
       console.log('GraphQL Response:', response.data);
 
       // Add the orders to the allOrders array
-      // allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
-      allOrders.push(response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      // allOrders.push(response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
       console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
       console.log('allOrders', allOrders);
       // Update cursor and hasNextPage based on the response
@@ -794,7 +794,7 @@ app.post('/api/order', async (req, res) => {
 
     // Fetch sales data for all tags (including blank tags)
     let cursor = '';
-    let totalSalesAllTags = 0;
+    var totalSalesAllTags = 0;
     let allTagOrders = []; // Store all orders with tags for later use
 
     while (true) { // Infinite loop to gather all orders
