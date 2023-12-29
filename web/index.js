@@ -421,7 +421,7 @@ function  getDeclineProductData(id, shop, token){
 
   return axios.request(config)
   .then((response) => {
-    return JSON.stringify(response.data);
+    return JSON.stringify(response?.data);
   })
   .catch((error) => {
     console.log(error);
@@ -566,7 +566,7 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
           const lastOrder = customer_detail[lastOrderIndex];
           currentOrderId = lastOrder?.[0]?.[0]?.id;
 
-          console.log('currentOrderId', currentOrderId);
+          console.log('decline currentOrderId', lastOrder?.[0]);
 
           // Define the tags to add for the current order
           const tags = tagsToAdd;
