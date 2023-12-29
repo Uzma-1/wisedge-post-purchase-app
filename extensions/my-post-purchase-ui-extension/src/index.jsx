@@ -26,9 +26,6 @@ extend("Checkout::PostPurchase::ShouldRender", async ({ inputData }) => {
   const orderId = inputData.orderId;
   const orderTotal = inputData.orderTotal;
 
-  // console.log("Order ID:", orderId);
-  // console.log("Order Total:", orderTotal);
-
   
   // Return the result of the post-purchase check
   return { render: true };
@@ -59,15 +56,12 @@ export function App() {
   for(var i=0;i<line_items?.length;i++){
     var product_id = line_items[i]['product']['id'];
     productarray[i] = product_id;
-    // console.log('line_items', line_items);
   }
-  console.log("productarray",inputData);
 
 
     // Accept Offer
     async function sendProductData(){
       try {
-        console.log("get offer function");
         const response = await fetch(`${APP_URL}/api/get-offer`, {
           method: 'POST',
           mode: 'cors',
@@ -80,7 +74,6 @@ export function App() {
             shop: shop
           }),
         });
-        console.log("get offer function bottom");
         const data = await response.json();
         var resp = data?.data;
         if(resp == undefined){
@@ -114,12 +107,10 @@ export function App() {
       
             const data = await response.json();
             setDeclineProData(data?.data);
-            // console.log('decline resp', declineProData);
             setDeclineOfferClicked(true);
             // Set loading to false when done
             setDeclineOfferLoading(false);
           } catch (error) {
-            console.log(error);
             setDeclineOfferLoading(false);
           }
     }
@@ -144,7 +135,6 @@ export function App() {
   const decline_pro_variant_id = +declineProData?.product?.variants?.edges[0]?.node?.legacyResourceId;
   const decline_pro_main_price = declineProData?.product?.variants?.edges[0]?.node?.price;
 
-  // console.log('calculatedPurchase', calculatedPurchase);
 
 
   // Define the changes that you want to make to the purchase, including the discount to the product.
@@ -201,10 +191,8 @@ export function App() {
 
    // Extract values from the calculated purchase.
    
-  console.log('accept offer???');
    async function acceptOffer() {
     setAcceptOfferLoading(true);
-    console.log("sign changeset top");
     try {
       // Make a request to your app server to sign the changeset with your app's API secret key.
       const tokenData = await fetch(`${APP_URL}/api/sign-changeset`, {
@@ -223,10 +211,8 @@ export function App() {
           isOrderFromPostPurchaseApp: true
         }),
       });
-      console.log('accept console working');
       if (tokenData.status == 200) {
         const resp = await tokenData.json();
-        console.log('Response from sign-changeset:', resp);
   
         // Proceed with applying the changeset if necessary
         await applyChangeset(resp.token);
@@ -270,7 +256,6 @@ export function App() {
    })
    if (token.status == 200) {
     const resp = await token.json();
-    console.log('Response from sign-changeset:', resp);
 
     // Proceed with applying the changeset if necessary
     await applyChangeset(resp.token);
