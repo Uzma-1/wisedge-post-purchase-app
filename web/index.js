@@ -140,11 +140,11 @@ async function getAllOrders(id, shop, token) {
       console.log('GraphQL Response:', response.data);
 
       // Add the orders to the allOrders array
-      allOrders.push(...response.data.data.customer.orders.edges.map(orderEdge => orderEdge.node));
+      allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
 
       // Update cursor and hasNextPage based on the response
-      cursor = response.data.data.customer.orders.pageInfo.endCursor;
-      hasNextPage = response.data.data.customer.orders.pageInfo.hasNextPage;
+      cursor = response?.data?.data?.customer?.orders?.pageInfo?.endCursor;
+      hasNextPage = response?.data?.data?.customer?.orders?.pageInfo?.hasNextPage;
     } catch (error) {
       throw error;
     }
