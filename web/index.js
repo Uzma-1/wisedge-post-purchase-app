@@ -196,7 +196,7 @@ async function updateOrderTags(id, shop, tags, token) {
     // Handle the response
     if (response.status === 200) {
       console.log('Order tags updated successfully.');
-      console.log(JSON.stringify(response.data));
+      console.log("update order tag", JSON.stringify(response.data));
 
       // Return the updated order details
       return response?.data?.data?.orderUpdate?.order;
