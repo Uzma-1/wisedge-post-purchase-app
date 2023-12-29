@@ -140,7 +140,9 @@ async function getAllOrders(id, shop, token) {
       console.log('GraphQL Response:', response.data);
 
       // Add the orders to the allOrders array
-      allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      var allOrderData = response?.data?.data?.customer?.orders?.edges;
+      // allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
+      allOrders.push(...allOrderData.map(orderEdge => orderEdge?.node));
       console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
       console.log('allOrders', allOrders);
       // Update cursor and hasNextPage based on the response
@@ -241,7 +243,8 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
       if (isOrderFromPostPurchaseApp == true) {
         // You might need to implement logic here to determine if this order is from applychangeset
 
-        customer_detail = await getAllOrders(customerId, shop, tokenFinal);
+        var customer_detail_data = await getAllOrders(customerId, shop, tokenFinal);
+        customer_detail.push(customer_detail_data);
 
         console.log('customer_detail', customer_detail);
         // Get the last order in the list (if any)
