@@ -259,7 +259,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         console.log('accept lastOrderIndex', lastOrderIndex);
         if (lastOrderIndex >= 0) {
           var lastOrder = customer_detail[lastOrderIndex];
-          currentOrderId = lastOrder?.[0]?.[0]?.id;
+          currentOrderId = lastOrder?.[0]?.id;
 
           console.log('lastOrder???', lastOrder?.[0]);
 
