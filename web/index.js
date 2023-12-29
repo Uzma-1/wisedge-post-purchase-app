@@ -249,8 +249,8 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         // Get the last order in the list (if any)
         const lastOrderIndex = customer_detail?.length - 1;
         if (lastOrderIndex >= 0) {
-          const lastOrder = customer_detail[lastOrderIndex];
-          currentOrderId = lastOrder?.id;
+          var lastOrder = customer_detail[lastOrderIndex];
+          currentOrderId = lastOrder?.[0]?.id;
 
           console.log('currentOrderId', customer_detail[lastOrderIndex]);
 
