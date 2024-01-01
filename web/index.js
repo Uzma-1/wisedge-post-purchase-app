@@ -157,6 +157,7 @@ async function getAllOrders(id, shop, token) {
 
   // Sort orders by creation date in descending order
   const sortedOrders = allOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  console.log('sortedOrders', sortedOrders);
 
   return sortedOrders;
 }
@@ -251,14 +252,14 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
           // Retrieve all orders for the customer
           // Retrieve all orders for the customer
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
-
+          console.log('customerOrders', customerOrders);
         // Get the latest order in the list (if any)
         const latestOrder = customerOrders[0];
 
         if (latestOrder) {
           currentOrderId = latestOrder.id;
 
-          console.log('Latest Order ID:', customerOrders);
+          console.log('Latest Order ID:', latestOrder);
 
           // Define the tags to add for the current order
           const tags = tagsToAdd;
