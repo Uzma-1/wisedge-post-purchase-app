@@ -672,7 +672,7 @@ app.get('/api/shopToken', (req, res) => {
 
     var result_data = result;
     const date = new Date().toJSON().slice(0, 10);
-    console.log('shopToken date', date);
+    console.log('shopToken date', token);
         if(result_data.length>0){
          if(result[0].access_token === token) {
             console.log("Token already exist");
