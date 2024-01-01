@@ -252,7 +252,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
           // Retrieve all orders for the customer
           // Retrieve all orders for the customer
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
-          console.log('customerOrders', customerOrders);
+          console.log('customerOrders', customerOrders?.length);
         // Get the latest order in the list (if any)
         const latestOrder = customerOrders[0];
 
