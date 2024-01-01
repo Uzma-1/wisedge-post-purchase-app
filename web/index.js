@@ -306,7 +306,8 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
             }
           }`;
           var lastOrderResponse = await getQueryResponse(order_query, shop, tokenFinal);
-          console.log('lastOrderResponse', lastOrderResponse?.data?.orders?.edges?.[0]);
+          var lastOrderId = lastOrderResponse?.data?.orders?.edges?.[0]?.node?.id
+          console.log('lastOrderId', lastOrderId);
 
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
           console.log('customerOrders', customerOrders?.length);
@@ -323,7 +324,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
 
           // Update order tags using the updateOrderTags function
           try {
-            order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
+            order_detail = await updateOrderTags(lastOrderId, shop, tags, tokenFinal);
           } catch (updateError) {
             console.error(updateError);
             res.status(500).send("Error updating order tags");
