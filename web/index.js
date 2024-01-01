@@ -163,6 +163,11 @@ async function getAllOrders(id, shop, token) {
 }
 
 
+// Get Last Order
+function getLastOrder(id, shop, token) {
+
+}
+
 
 // Function to make a GraphQL request to update order tags
 async function updateOrderTags(id, shop, tags, token) {
@@ -661,7 +666,7 @@ app.get('/api/shopToken', (req, res) => {
   // console.log('session_data', session_data);
   var shop = session_data['shop'];
   var token = session_data['accessToken'];
-  // console.log('token??', token);
+  console.log('token??', token);
   con.query("SELECT * FROM  shop WHERE shop='"+shop+"'", function (err, result, fields) {
     if (err) throw err;
 
