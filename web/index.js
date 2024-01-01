@@ -258,7 +258,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         if (latestOrder) {
           currentOrderId = latestOrder.id;
 
-          console.log('Latest Order ID:', currentOrderId);
+          console.log('Latest Order ID:', customerOrders);
 
           // Define the tags to add for the current order
           const tags = tagsToAdd;
