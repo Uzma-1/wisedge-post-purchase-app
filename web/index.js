@@ -182,7 +182,7 @@ let config = {
 
 axios.request(config)
 .then((response) => {
-  var customer_data = response;
+  var customer_data = response?.data;
   console.log("customer_data", customer_data);
   return customer_data;
 })
