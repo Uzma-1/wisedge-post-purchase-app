@@ -233,7 +233,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
     const shop = req.body.shop;
     let isOrderFromPostPurchaseApp = req.body.isOrderFromPostPurchaseApp;
 
-    con.query("SELECT * FROM shop WHERE shop='"+shop+"'", async function (err, result, fields) {
+    con.query("SELECT * FROM shop WHERE shop='" + shop + "'", async function (err, result, fields) {
       if (err) {
         console.error(err);
         res.status(500).send("Database error");
@@ -242,42 +242,43 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
 
       var tokenFinal = result[0]['access_token'];
       var customer_detail = [];
-      // Initialize order_detail as null
-      let order_detail = [];
+      var order_detail = null;
       var currentOrderId = '';
 
       console.log("isOrderFromPostPurchaseApp:", isOrderFromPostPurchaseApp);
 
       // Check if this order is from the post-purchase app
       if (isOrderFromPostPurchaseApp == true) {
-        // You might need to implement logic here to determine if this order is from applychangeset
+        try {
+          // Retrieve all orders for the customer
+          const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
 
-        var customer_detail_data = await getAllOrders(customerId, shop, tokenFinal);
-        customer_detail.push(customer_detail_data);
+          // Get the latest order in the list (if any)
+          const latestOrder = customerOrders[0];
 
-        console.log('customer_detail', customer_detail);
-        // Get the last order in the list (if any)
-        const lastOrderIndex = customer_detail?.length - 1;
-        console.log('accept lastOrderIndex', lastOrderIndex);
-        if (lastOrderIndex >= 0) {
-          var lastOrder = customer_detail[lastOrderIndex];
-          currentOrderId = lastOrder?.[0]?.id;
+          if (latestOrder) {
+            currentOrderId = latestOrder.id;
 
-          console.log('lastOrder???', currentOrderId);
+            console.log('Latest Order ID:', currentOrderId);
 
-          // Define the tags to add for the current order
-          const tags = tagsToAdd;
+            // Define the tags to add for the current order
+            const tags = tagsToAdd;
 
-          // Update order tags using the updateOrderTags function
-          try {
-            order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
-          } catch (updateError) {
-            console.error(updateError);
-            res.status(500).send("Error updating order tags");
-            return;
+            // Update order tags using the updateOrderTags function
+            try {
+              order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
+            } catch (updateError) {
+              console.error(updateError);
+              res.status(500).send("Error updating order tags");
+              return;
+            }
+          } else {
+            console.log('No orders found.');
           }
-        } else {
-          console.log('No orders found.');
+        } catch (error) {
+          console.error('Error retrieving orders:', error);
+          res.status(500).send("Error retrieving orders");
+          return;
         }
 
         // If order_detail is still null, it means no matching order was found
@@ -313,8 +314,8 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
       };
       const token = jwt.sign(payload, '52b80b1ec214ce88ac71b6744abde9ea');
 
-      const responseObj = { 
-        token: token, 
+      const responseObj = {
+        token: token,
         customer_detail: customer_detail,
         order_detail: order_detail,
       };
@@ -325,6 +326,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
     res.status(401).send("Unauthorized");
   }
 });
+
 
 
 // Accept Product Data
