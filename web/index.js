@@ -163,34 +163,34 @@ async function getAllOrders(id, shop, token) {
 }
 
 // Get Customer Email
-async function getQueryResponse(query, shop, token){
-let data = JSON.stringify({
-  query: query,
-  variables: {}
-});
+async function getQueryResponse(query, shop, token) {
+  try {
+    let data = JSON.stringify({
+      query: query,
+      variables: {}
+    });
 
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: `https://${shop}/admin/api/unstable/graphql.json`,
-  headers: { 
-    'X-Shopify-Access-Token': token, 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: `https://${shop}/admin/api/unstable/graphql.json`,
+      headers: {
+        'X-Shopify-Access-Token': token,
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
 
-axios.request(config)
-.then((response) => {
-  var customer_data = response?.data;
-  console.log("customer_data", customer_data);
-  return customer_data;
-})
-.catch((error) => {
-  console.log(error);
-});
-
+    const response = await axios.request(config);
+    var customer_data = response?.data;
+    console.log("customer_data", customer_data);
+    return customer_data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
+
 
 // Get Last Order
 function getLastOrder(id, shop, token) {
@@ -290,8 +290,10 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
               email
             }
           }`;
-          const customerEmail = await getQueryResponse(query_data, shop, tokenFinal);
+          const customerEmailResponse = await getQueryResponse(query_data, shop, tokenFinal);
+          const customerEmail = customerEmailResponse?.data?.customer?.email;
           console.log('customerEmail', customerEmail);
+
 
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
           console.log('customerOrders', customerOrders?.length);
