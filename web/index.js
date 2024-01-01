@@ -182,8 +182,8 @@ let config = {
 
 axios.request(config)
 .then((response) => {
-  var customer_data = JSON.stringify(response?.data);
-  console.log("customer email", JSON.stringify(response?.data));
+  var customer_data = response;
+  console.log("customer_data", customer_data);
   return customer_data;
 })
 .catch((error) => {
@@ -291,9 +291,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
             }
           }`;
           const customerEmail = await getQueryResponse(query_data, shop, tokenFinal);
-          // var customer_email = customerEmail;
           console.log('customerEmail', customerEmail);
-          // console.log('customer_email', customer_email);
 
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
           console.log('customerOrders', customerOrders?.length);
