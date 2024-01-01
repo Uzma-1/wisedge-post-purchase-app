@@ -162,6 +162,33 @@ async function getAllOrders(id, shop, token) {
   return sortedOrders;
 }
 
+// Get Customer Email
+async function getQueryResponse(query, shop, token){
+let data = JSON.stringify({
+  query: query,
+  variables: {}
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: `https://${shop}/admin/api/unstable/graphql.json`,
+  headers: { 
+    'X-Shopify-Access-Token': token, 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log("customer email", JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+}
 
 // Get Last Order
 function getLastOrder(id, shop, token) {
@@ -256,6 +283,14 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
         try {
           // Retrieve all orders for the customer
           // Retrieve all orders for the customer
+          var query_data = `query {
+            customer(id: "gid://shopify/Customer/`+customerId+`") {
+              email
+            }
+          }`;
+          const customerEmail = await getQueryResponse(query_data, shop, tokenFinal);
+          console.log('customerEmail', customerEmail);
+
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
           console.log('customerOrders', customerOrders?.length);
         // Get the latest order in the list (if any)
