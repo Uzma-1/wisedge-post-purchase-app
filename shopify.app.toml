@@ -20,7 +20,7 @@ redirect_urls = [
 api_version = "2023-07"
 
 [app_proxy]
-url = "https://sells-toy-spies-hyundai.trycloudflare.com/get-offer"
+url = "https://females-ohio-courts-empire.trycloudflare.com/get-offer"
 subpath = "offer"
 prefix = "apps"
 

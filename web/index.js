@@ -291,7 +291,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
             }
           }`;
           const customerEmail = await getQueryResponse(query_data, shop, tokenFinal);
-          console.log('customerEmail', await getQueryResponse(query_data, shop, tokenFinal));
+          console.log('customerEmail', customerEmail);
 
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
           console.log('customerOrders', customerOrders?.length);
