@@ -182,8 +182,9 @@ let config = {
 
 axios.request(config)
 .then((response) => {
+  var customer_data = JSON.stringify(response?.data);
   console.log("customer email", JSON.stringify(response?.data));
-  return response?.data?.data?.customer?.email;
+  return customer_data;
 })
 .catch((error) => {
   console.log(error);
