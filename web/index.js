@@ -107,16 +107,16 @@ app.post("/api/offer", async (req, res) => {
 
 // Get Order
 async function getAllOrders(id, shop, token) {
-  const ordersPerPage = 10; // Number of orders to fetch per page
-  let hasNextPage = true; // Flag to track if there are more pages
-  let cursor = null; // Initialize the cursor to null
+  const ordersPerPage = 10;
+  let hasNextPage = true;
+  let cursor = null;
 
-  const allOrders = []; // Array to store all orders
+  const allOrders = [];
 
   while (hasNextPage) {
     try {
       let data = JSON.stringify({
-        "query": "query($customerId: ID!, $ordersPerPage: Int!, $cursor: String) { customer(id: $customerId) { id displayName orders(first: $ordersPerPage, after: $cursor) { pageInfo { hasNextPage endCursor } edges { node { id name tags totalPriceSet { shopMoney { amount currencyCode } } lineItems(first: 5) { edges { node { id title quantity variant { title price } } } } } } } } }",
+        "query": "query($customerId: ID!, $ordersPerPage: Int!, $cursor: String) { customer(id: $customerId) { id displayName orders(first: $ordersPerPage, after: $cursor) { pageInfo { hasNextPage endCursor } edges { node { id name tags createdAt totalPriceSet { shopMoney { amount currencyCode } } lineItems(first: 5) { edges { node { id title quantity variant { title price } } } } } } } } }",
         "variables": {
           "customerId": `gid://shopify/Customer/${id}`,
           "ordersPerPage": ordersPerPage,
@@ -128,9 +128,9 @@ async function getAllOrders(id, shop, token) {
         method: 'post',
         maxBodyLength: Infinity,
         url: `https://${shop}/admin/api/unstable/graphql.json`,
-        headers: { 
-          'X-Shopify-Access-Token': token, 
-          'Content-Type': 'application/json', 
+        headers: {
+          'X-Shopify-Access-Token': token,
+          'Content-Type': 'application/json',
           'Cookie': 'request_method=POST'
         },
         data: data
@@ -139,20 +139,14 @@ async function getAllOrders(id, shop, token) {
       const response = await axios.request(config);
       console.log('GraphQL Response:', response.data);
 
-      // Add the orders to the allOrders array
-      // allOrders.push(...response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
-      // allOrders.push(response?.data?.data?.customer?.orders?.edges.map(orderEdge => orderEdge?.node));
       const orderEdges = response?.data?.data?.customer?.orders?.edges;
-      console.log('orderEdges', orderEdges);
+
       if (orderEdges) {
         allOrders.push(...orderEdges.map(orderEdge => orderEdge?.node));
       } else {
         console.error('No order edges found in the response.');
-        // You might want to handle this case accordingly based on your requirements
       }
-      console.log('response data ??', response?.data?.data?.customer?.orders?.edges);
-      console.log('allOrders', allOrders);
-      // Update cursor and hasNextPage based on the response
+
       cursor = response?.data?.data?.customer?.orders?.pageInfo?.endCursor;
       hasNextPage = response?.data?.data?.customer?.orders?.pageInfo?.hasNextPage;
     } catch (error) {
@@ -161,7 +155,10 @@ async function getAllOrders(id, shop, token) {
     }
   }
 
-  return allOrders;
+  // Sort orders by creation date in descending order
+  const sortedOrders = allOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  return sortedOrders;
 }
 
 
@@ -251,30 +248,32 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
       if (isOrderFromPostPurchaseApp == true) {
         try {
           // Retrieve all orders for the customer
-          const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
+          // Retrieve all orders for the customer
+        const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
 
-          // Get the latest order in the list (if any)
-          const latestOrder = customerOrders[0];
+        // Get the latest order in the list (if any)
+        const latestOrder = customerOrders[0];
 
-          if (latestOrder) {
-            currentOrderId = latestOrder.id;
+        if (latestOrder) {
+          currentOrderId = latestOrder.id;
 
-            console.log('Latest Order ID:', currentOrderId);
+          console.log('Latest Order ID:', currentOrderId);
 
-            // Define the tags to add for the current order
-            const tags = tagsToAdd;
+          // Define the tags to add for the current order
+          const tags = tagsToAdd;
 
-            // Update order tags using the updateOrderTags function
-            try {
-              order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
-            } catch (updateError) {
-              console.error(updateError);
-              res.status(500).send("Error updating order tags");
-              return;
-            }
-          } else {
-            console.log('No orders found.');
+          // Update order tags using the updateOrderTags function
+          try {
+            order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
+          } catch (updateError) {
+            console.error(updateError);
+            res.status(500).send("Error updating order tags");
+            return;
           }
+        } else {
+          console.log('No orders found.');
+        }
+
         } catch (error) {
           console.error('Error retrieving orders:', error);
           res.status(500).send("Error retrieving orders");
