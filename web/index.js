@@ -629,6 +629,29 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
       if (isOrderFromPostPurchaseApp == true) {
         // You might need to implement logic here to determine if this order is from applychangeset
 
+        var query_data = `query {
+          customer(id: "gid://shopify/Customer/`+customerId+`") {
+            email
+          }
+        }`;
+        const customerEmailResponse = await getQueryResponse(query_data, shop, tokenFinal);
+        const customerEmail = customerEmailResponse?.data?.customer?.email;
+        console.log('customerEmail', customerEmail);
+
+        // Get Last OrderId
+        var order_query = `query {
+          orders(first: 1, query: "email:`+customerEmail+`",reverse:true) {
+            edges {
+              node {
+                id
+                displayFinancialStatus
+              }
+            }
+          }
+        }`;
+        var lastOrderResponse = await getQueryResponse(order_query, shop, tokenFinal);
+        var lastOrderId = lastOrderResponse?.data?.orders?.edges?.[0]?.node?.id
+
         var customer_detail_data = await getAllOrders(customerId, shop, tokenFinal);
         customer_detail.push(customer_detail_data);
         console.log('customer_detail decline',customer_detail);
@@ -647,7 +670,7 @@ app.post("/api/decline-changeset", cors(), async (req, res) => {
 
           // Update order tags using the updateOrderTags function
           try {
-            order_detail = await updateOrderTags(currentOrderId, shop, tags, tokenFinal);
+            order_detail = await updateOrderTags(lastOrderId, shop, tags, tokenFinal);
           } catch (updateError) {
             console.error(updateError);
             res.status(500).send("Error updating order tags");
