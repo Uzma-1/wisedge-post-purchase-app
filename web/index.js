@@ -306,7 +306,7 @@ app.post("/api/sign-changeset", cors(), async (req, res) => {
             }
           }`;
           var lastOrderResponse = await getQueryResponse(order_query, shop, tokenFinal);
-          console.log('lastOrderResponse', lastOrderResponse);
+          console.log('lastOrderResponse', lastOrderResponse?.data?.orders?.edges?.[0]?.id);
 
         const customerOrders = await getAllOrders(customerId, shop, tokenFinal);
           console.log('customerOrders', customerOrders?.length);
