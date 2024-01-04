@@ -1,0 +1,27 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "dummy-test-app"
+client_id = "aaa028deed25c9bdaddbb2071fc716c6"
+application_url = "https://join-mj-powell-er.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://join-mj-powell-er.trycloudflare.com/auth/callback",
+  "https://join-mj-powell-er.trycloudflare.com/auth/shopify/callback",
+  "https://join-mj-powell-er.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "stark-edgemk.myshopify.com"
