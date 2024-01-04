@@ -2,7 +2,7 @@
 
 name = "dummy-test-app"
 client_id = "aaa028deed25c9bdaddbb2071fc716c6"
-application_url = "https://join-mj-powell-er.trycloudflare.com"
+application_url = "https://dummy-app-test-de75546be02a.herokuapp.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://join-mj-powell-er.trycloudflare.com/auth/callback",
-  "https://join-mj-powell-er.trycloudflare.com/auth/shopify/callback",
-  "https://join-mj-powell-er.trycloudflare.com/api/auth/callback"
+  "https://dummy-app-test-de75546be02a.herokuapp.com/auth/callback",
+  "https://dummy-app-test-de75546be02a.herokuapp.com/auth/shopify/callback",
+  "https://dummy-app-test-de75546be02a.herokuapp.com/api/auth/callback"
 ]
 
 [webhooks]
